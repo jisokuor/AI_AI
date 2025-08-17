@@ -1,4 +1,41 @@
+
+Project Context: Artificial SUT for Autonomous Agent Test Management (Agent Zero / ISTQB Test Manager)
+====================================================================================================
+**This repository contains a simulation system created solely as an *artificial System Under Test (SUT)*
+and is not intended for production, research, or real-world modeling.**
+
+All code, outputs, and artifact structures are purpose-built as a digital testbed enabling advanced, automated
+test management and reporting activities by autonomous agent-based QA teams—led by the ISTQB-Certified
+Advanced Test Manager profile *Gilbert-000* (Agent Zero, agent0ai) and its subagents.
+
+- The SUT is designed for agent-driven test case design, metrics collection, automated regression, demo scenarios,
+  tool/lifecycle integration, and reproducible audit trails.
+- All orchestration, batch runs, artifact generation, and logging are performed (and consumed) by Agent Zero and
+  its subagents acting as a synthetic, continuously-operating test organization (see 'About agent0ai').
+- Outputs reflect agent-driven operation, not manual or interactive modeling use.
+
+For human users: This project demonstrates ISTQB best practices as implemented by an artificial test team, led by
+Agent Zero / Gilbert-000, to manage the full SUT lifecycle (planning, execution, reporting, and CI integration).
+See detailed usage in the 'Autonomous and Programmatic Usage' section.
+
 # Dolphin vs Human Spatial Competition Simulation
+
+
+Project Purpose: Artificial SUT for Professional AI Test Management
+==================================================================
+This simulation suite is **not** a real-world ecological or demographic model. It is an *artificial System Under Test (SUT)*—a controllable digital landscape created solely to serve as an internal, observable testbed for the autonomous test management agent **Agent Zero (agent0ai)**, also called **Gilbert-000** (ISTQB Advanced Level Test Manager).
+
+**Why does this SUT exist?**
+- To provide a reproducible, well-instrumented platform for automated test case design, metrics collection, regression, tooling evaluation, lifecycle analysis, and reporting by the agent-based test team.
+- To support demonstration, orchestrated testing, audit, and CI/CD workflows managed by Agent Zero and subagents acting as a professional test organization.
+- All configuration, test runs, logs, and metrics are under agent and subagent control, produced for agent-driven processes—*not* direct user/modeling/scientific research.
+
+**Who is the operator?**
+- Agent Zero (agent0ai / Gilbert-000) is an ISTQB Advanced Certified Test Manager, orchestrating batch tests, metrics-driven analysis, artifact management, version control, and all audit/reporting using this SUT.
+- The entire software, output policy, versioning, and CI are designed to enable automated and auditable test management workflows, with example scenarios in the docs.
+
+See also: 'About agent0ai' and 'Autonomous and Programmatic Usage' below.
+
 
 **A grid-based demographic and ecological simulation of dolphins and humans competing for space, resources, and survival.**
 
