@@ -79,3 +79,44 @@ _Every simulation run creates its own, timestamped, UUID-suffixed subfolder (e.g
 ---
 
 _Last updated: 2025-08-17_
+
+
+## Autonomous and Programmatic Usage
+
+This repository is designed for fully autonomous, hands-free operation, suitable for agent orchestration, large-scale experiments, or automated workflows. All key features for autonomous and programmatic use are included (excluding credential management).
+
+**Key Features Supporting Autonomy:**
+- **Batch Runnable & Headless:** All simulation runs, including different scenarios, parameter sweeps, or batch testing, can be run fully non-interactively from the CLI (see `--no-confirm`, `--output-dir`, `--steps`, `--seed`, etc). Demo and test runs are gated off via the `--demo` flag.
+- **Reproducible Outputs:** Every run creates a uniquely named output directory (timestamp plus short UUID) under `outputs/` or as specified with `--output-dir`. This ensures collision-free, versioned, and auditable experiment outputs without overwrites.
+- **Configurable via CLI:** All scenario configuration—founder numbers, sex splits, illness parameters, grid size, number of steps, seeds, etc.—can be set via command-line flags, enabling automation by shell scripts or workflow runners.
+- **No GUI Required:** The simulation can run entirely in the background. All essential outputs—population histories, run summaries, GIF animations—are written to the output directory. Results are never sent outside the specified folder tree.
+- **No External Intervention Needed:** With confirmation flags set, a full experiment or parameter sweep can proceed on any system with Python and required dependencies installed.
+- **Audit & Logging:** Per-run logs, output and summary files, and run parameters (including seeds) are saved in each output directory for robust reproducibility.
+- **Demo/Test Isolation:** Demo/test runs go to special subfolders and are never allowed to overwrite or intermingle with real output data, ensuring safe experimentation without risk to production results.
+- **Supports Orchestration:** You can invoke the simulation from Python, bash, or workflow runners (e.g., GitHub Actions/CI/CD, SLURM, Airflow) to automate large study designs.
+
+**Example: Automated Batch Run (Headless)**
+```bash
+python grid_competition.py --steps 100 --grid-size 50 --seed 42 --output-dir ./outputs/ai_batch_test1 --no-confirm
+```
+
+**Recommended Autonomous Workflow:**
+1. Install requirements (see below).
+2. Prepare your scenario/configuration (either via CLI flags or a wrapper script).
+3. Launch batch or single runs with `--no-confirm` and an explicit `--output-dir` (one per process/replicate for parallel jobs), or let the script auto-generate output folders.
+4. All outputs (logs, GIFs, summaries, population time series) will be in the per-run folder, safely versioned.
+5. Optionally run analysis scripts or test suites on the output folders.
+
+**Credential-Free Operation:**
+- All local code and CLI runs require no credentials.
+- For pushing data/code to remote repositories (e.g., GitHub), only the minimal token or deploy key for version control is ever required, and those are never stored or hard-coded in the codebase.
+- All settings for outputs, logging, and automation are controlled via flags or config files, not environment secrets.
+
+**CI/CD Integration Tips:**
+You can set up automated regression testing or batch simulation using continuous integration pipelines:
+- Add runner stages that call the simulation entrypoint(s) non-interactively with scenario and output arguments.
+- Artifacts can be stored as pipeline artifacts or exported to data lakes for metaanalysis.
+
+See the usage and troubleshooting sections below for more details. For direct automation or programmatic control, see the docstring of `grid_competition.py` and the CLI `--help` output.
+
+_Last updated: 2025-08-17_
