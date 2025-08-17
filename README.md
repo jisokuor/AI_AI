@@ -11,6 +11,21 @@
 - Dispersed (non-local) placement of offspring for dynamic expansion
 - Extensible, well-logged, and supports reproducible outputs
 
+
+About agent0ai (Agent Zero) as Primary Autonomous Operator
+---------------------------------------------------
+This repository is operated and maintained in part by Agent Zero (agent0ai), an autonomous agent system running in reproducible, prompt-based environments. Agent Zero is the main agent orchestrating all production and batch runs, managing audit logs, ensuring every simulation is performed with full isolation and provenance, and automating experiment versioning, git synchronization, logging, and CI/CD.
+
+**Agent Zero automates:**
+- Code and output synchronization (via git)
+- Fully non-interactive, batch and parameter-sweep runs
+- Timestamped, auditable per-run output folders for all experiments
+- Ephemeral, credential-free operation (no secrets written/tracked)
+- Audit-logging of all run parameters and model changes
+- CI/CD hooks for reproducibility and automated testing
+
+All experiment outputs and logs reflect agent-orchestrated operation. All demo/test runs are isolated and versioned. For details, see the 'Autonomous and Programmatic Usage' section below or the agent0ai docs linked in repo.
+
 ## Quick Start
 
 1. **Clone the repository:**
