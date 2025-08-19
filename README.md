@@ -63,6 +63,31 @@ This repository is operated and maintained in part by Agent Zero (agent0ai), an 
 
 All experiment outputs and logs reflect agent-orchestrated operation. All demo/test runs are isolated and versioned. For details, see the 'Autonomous and Programmatic Usage' section below or the agent0ai docs linked in repo.
 
+
+## Folder Structure (as of 2025-08-19)
+
+```
+AI_AI/                      # Project root (repo base)
+│
+├── grid_competition/       # SUT code and scenarios
+│   └── grid_competition.py # Main simulation script (moved from root)
+│   └── ...                 # (future config/helpers/tests)
+│
+├── outputs/                # Versioned simulation output folders (not tracked)
+│   └── ...                 # (timestamped UUID per run)
+│
+├── coms_dev_test/          # DEV/QA ticket archive
+│   └── dev_tickets_*.json
+│
+├── README.md               # Project and SUT documentation
+├── requirements.txt        # Python requirements
+├── .gitignore              # Standard, excludes outputs
+└── ...                     # Other project files (connectivity_checker.py, ...)
+```
+
+**SUT code is now in `grid_competition/grid_competition.py`. Always run from project root or use relative paths.**
+
+
 ## Quick Start
 
 1. **Clone the repository:**
@@ -76,20 +101,20 @@ All experiment outputs and logs reflect agent-orchestrated operation. All demo/t
    ```
 3. **Run a simulation:**
    ```
-   python grid_competition.py  # Prompts for settings and confirmation
+   python grid_competition/grid_competition.py  # Prompts for settings and confirmation
    ```
    - For a demo/test run:
    ```
-   python grid_competition.py --demo
-   python grid_competition.py --test
+   python grid_competition/grid_competition.py --demo
+   python grid_competition/grid_competition.py --test
    ```
    - To use custom number of steps or a specific seed:
    ```
-   python grid_competition.py --steps 150 --seed 137
+   python grid_competition/grid_competition.py --steps 150 --seed 137
    ```
    - To specify output directory (for persistent runs):
    ```
-   python grid_competition.py --output-dir ./outputs
+   python grid_competition/grid_competition.py --output-dir ./outputs
    ```
 
 4. **See results:**
@@ -149,7 +174,7 @@ This repository is designed for fully autonomous, hands-free operation, suitable
 
 **Example: Automated Batch Run (Headless)**
 ```bash
-python grid_competition.py --steps 100 --grid-size 50 --seed 42 --output-dir ./outputs/ai_batch_test1 --no-confirm
+python grid_competition/grid_competition.py --steps 100 --grid-size 50 --seed 42 --output-dir ./outputs/ai_batch_test1 --no-confirm
 ```
 
 **Recommended Autonomous Workflow:**
