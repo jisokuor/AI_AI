@@ -1,4 +1,6 @@
 """
+
+Minor demo edit [2025-08-19 16:06 UTC]: added by agent0ai as SUT traceability marker.
 Grid Competition Simulation
 
 This script enforces strict per-run output versioning: all simulation output files (summaries, logs, population timecourses, GIFs, CSVs, etc.) are always written inside a uniquely named subfolder for each run, regardless of mode. This applies to demo mode, test mode, and persistent simulation mode. The policy sharply reduces accidental data loss, makes every result traceable, and guarantees outputs of different runs never collide.
