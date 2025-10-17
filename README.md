@@ -197,3 +197,80 @@ You can set up automated regression testing or batch simulation using continuous
 See the usage and troubleshooting sections below for more details. For direct automation or programmatic control, see the docstring of `grid_competition.py` and the CLI `--help` output.
 
 _Last updated: 2025-08-17_
+# Ollama Gemma3 FastA2A Agent
+
+A minimal FastA2A-compatible agent in Python using FastAPI. Forwards prompts to a local Ollama Gemma3 API and returns responses in A2A format.
+
+## Features
+- Exposes `/.well-known/agent.json` (agent card) and `/a2a` endpoints
+- Forwards prompts to Ollama Gemma3 at `http://host.docker.internal:11434`
+- Returns model responses in FastA2A format
+
+## Requirements
+- Python 3.8+
+- Ollama running locally with the `gemma3` model pulled
+
+## Installation
+```bash
+cd /root/ollama_a2a_agent
+pip install -r requirements.txt
+```
+
+## Running the Agent
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+## Endpoints
+- **Agent Card:** `GET /.well-known/agent.json`
+- **A2A Chat:** `POST /a2a` with JSON body `{ "prompt": "your message" }`
+
+## Example Request
+```bash
+curl -X POST http://localhost:8000/a2a   -H 'Content-Type: application/json'   -d '{"prompt": "Hello, who are you?"}'
+```
+
+## Environment Variables (optional)
+- `OLLAMA_URL` (default: http://host.docker.internal:11434/api/generate)
+- `OLLAMA_MODEL` (default: gemma3)
+
+
+---
+
+# Ollama Gemma3 FastA2A Agent
+
+A minimal FastA2A-compatible agent in Python using FastAPI. Forwards prompts to a local Ollama Gemma3 API and returns responses in A2A format.
+
+## Features
+- Exposes `/.well-known/agent.json` (agent card) and `/a2a` endpoints
+- Forwards prompts to Ollama Gemma3 at `http://host.docker.internal:11434`
+- Returns model responses in FastA2A format
+
+## Requirements
+- Python 3.8+
+- Ollama running locally with the `gemma3` model pulled
+
+## Installation
+```bash
+cd /root/ollama_a2a_agent
+pip install -r requirements.txt
+```
+
+## Running the Agent
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+## Endpoints
+- **Agent Card:** `GET /.well-known/agent.json`
+- **A2A Chat:** `POST /a2a` with JSON body `{ "prompt": "your message" }`
+
+## Example Request
+```bash
+curl -X POST http://localhost:8000/a2a   -H Content-Type: application/json   -d {prompt: Hello, who are you?}
+```
+
+## Environment Variables (optional)
+- `OLLAMA_URL` (default: http://host.docker.internal:11434/api/generate)
+- `OLLAMA_MODEL` (default: gemma3)
+
