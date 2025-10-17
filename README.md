@@ -1,276 +1,132 @@
+# Ollama Gemma3 FastA2A Agent
 
-Project Context: Artificial SUT for Autonomous Agent Test Management (Agent Zero / ISTQB Test Manager)
-====================================================================================================
-**This repository contains a simulation system created solely as an *artificial System Under Test (SUT)*
-and is not intended for production, research, or real-world modeling.**
+The **FastA2A Ollama agent** is a Python FastAPI-based service that exposes a FastA2A v0.2-compatible API for avatars and automation tools. It acts as a bridge between FastA2A clients and a local Ollama LLM (e.g., Gemma3), enabling automated conversations, test automation, and integration into CI/CD workflows. The agent is designed for reliability, extensibility, and ease of use by both technical and non-technical users.
 
-All code, outputs, and artifact structures are purpose-built as a digital testbed enabling advanced, automated
-test management and reporting activities by autonomous agent-based QA teams—led by the ISTQB-Certified
-Advanced Test Manager profile *Gilbert-000* (Agent Zero, agent0ai) and its subagents.
+## Installation and Setup
+### Prerequisites
+- Python 3.9+
+- [Ollama](https://ollama.com/) installed and running locally (with a supported model, e.g., Gemma3)
+- Git (for cloning the repository)
+- Docker (optional, for containerized deployment)
 
-- The SUT is designed for agent-driven test case design, metrics collection, automated regression, demo scenarios,
-  tool/lifecycle integration, and reproducible audit trails.
-- All orchestration, batch runs, artifact generation, and logging are performed (and consumed) by Agent Zero and
-  its subagents acting as a synthetic, continuously-operating test organization (see 'About agent0ai').
-- Outputs reflect agent-driven operation, not manual or interactive modeling use.
-
-For human users: This project demonstrates ISTQB best practices as implemented by an artificial test team, led by
-Agent Zero / Gilbert-000, to manage the full SUT lifecycle (planning, execution, reporting, and CI integration).
-See detailed usage in the 'Autonomous and Programmatic Usage' section.
-
-# Dolphin vs Human Spatial Competition Simulation
-
-
-Project Purpose: Artificial SUT for Professional AI Test Management
-==================================================================
-This simulation suite is **not** a real-world ecological or demographic model. It is an *artificial System Under Test (SUT)*—a controllable digital landscape created solely to serve as an internal, observable testbed for the autonomous test management agent **Agent Zero (agent0ai)**, also called **Gilbert-000** (ISTQB Advanced Level Test Manager).
-
-**Why does this SUT exist?**
-- To provide a reproducible, well-instrumented platform for automated test case design, metrics collection, regression, tooling evaluation, lifecycle analysis, and reporting by the agent-based test team.
-- To support demonstration, orchestrated testing, audit, and CI/CD workflows managed by Agent Zero and subagents acting as a professional test organization.
-- All configuration, test runs, logs, and metrics are under agent and subagent control, produced for agent-driven processes—*not* direct user/modeling/scientific research.
-
-**Who is the operator?**
-- Agent Zero (agent0ai / Gilbert-000) is an ISTQB Advanced Certified Test Manager, orchestrating batch tests, metrics-driven analysis, artifact management, version control, and all audit/reporting using this SUT.
-- The entire software, output policy, versioning, and CI are designed to enable automated and auditable test management workflows, with example scenarios in the docs.
-
-See also: 'About agent0ai' and 'Autonomous and Programmatic Usage' below.
-
-
-**A grid-based demographic and ecological simulation of dolphins and humans competing for space, resources, and survival.**
-
-- Agent-based model on a grid (default 50x50)
-- Dolphins seeded as a contiguous founder blob (M+F pairs, region-growth)
-- Humans introduced as paired clusters (M+F pairs) after initial steps
-- Local reproduction requires adjacent male+female pairs
-- Individual movement (mate-seeking and random)
-- Density-dependent illness/crowding: high-density areas prone to cell death and weakening
-- Dispersed (non-local) placement of offspring for dynamic expansion
-- Extensible, well-logged, and supports reproducible outputs
-
-
-About agent0ai (Agent Zero) as Primary Autonomous Operator
----------------------------------------------------
-This repository is operated and maintained in part by Agent Zero (agent0ai), an autonomous agent system running in reproducible, prompt-based environments. Agent Zero is the main agent orchestrating all production and batch runs, managing audit logs, ensuring every simulation is performed with full isolation and provenance, and automating experiment versioning, git synchronization, logging, and CI/CD.
-
-**Agent Zero automates:**
-- Code and output synchronization (via git)
-- Fully non-interactive, batch and parameter-sweep runs
-- Timestamped, auditable per-run output folders for all experiments
-- Ephemeral, credential-free operation (no secrets written/tracked)
-- Audit-logging of all run parameters and model changes
-- CI/CD hooks for reproducibility and automated testing
-
-All experiment outputs and logs reflect agent-orchestrated operation. All demo/test runs are isolated and versioned. For details, see the 'Autonomous and Programmatic Usage' section below or the agent0ai docs linked in repo.
-
-
-## Folder Structure (as of 2025-08-19)
-
-```
-AI_AI/                      # Project root (repo base)
-│
-├── grid_competition/       # SUT code and scenarios
-│   └── grid_competition.py # Main simulation script (moved from root)
-│   └── ...                 # (future config/helpers/tests)
-│
-├── outputs/                # Versioned simulation output folders (not tracked)
-│   └── ...                 # (timestamped UUID per run)
-│
-├── coms_dev_test/          # DEV/QA ticket archive
-│   └── dev_tickets_*.json
-│
-├── README.md               # Project and SUT documentation
-├── requirements.txt        # Python requirements
-├── .gitignore              # Standard, excludes outputs
-└── ...                     # Other project files (connectivity_checker.py, ...)
+### Clone the Repository
+```bash
+git clone https://github.com/your-org/ollama_a2a_agent.git
+cd ollama_a2a_agent
 ```
 
-**SUT code is now in `grid_competition/grid_competition.py`. Always run from project root or use relative paths.**
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
+### Environment Setup
+- Ensure Ollama is running and the desired model (e.g., Gemma3) is available.
+- (Optional) Configure environment variables as needed (see `.env.example`).
+
+### Running the Agent (Host)
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+- The agent will be available at `http://localhost:8000`.
+
+### Running with Docker
+```bash
+docker build -t ollama-a2a-agent .
+docker run -d -p 8000:8000 --network=host ollama-a2a-agent
+```
+**Note:**
+- For Docker, use `--network=host` to allow access to the local Ollama instance.
+- If running in a container, ensure the agent listens on `0.0.0.0` and that Docker networking allows access to Ollama.
 
 ## Quick Start
+### Verify Endpoints
+- Check agent metadata:
+  ```bash
+  curl http://localhost:8000/.well-known/agent.json
+  ```
+- Send a test prompt:
+  ```bash
+  curl -X POST http://localhost:8000/a2a \
+    -H 'Content-Type: application/json' \
+    -d '{"prompt": "Hello, who are you?"}'
+  ```
+- You should receive a streaming or full JSON response from the model.
 
-1. **Clone the repository:**
-   ```
-   git clone https://github.com/jisokuor/AI_AI.git
-   cd AI_AI
-   ```
-2. **Set up dependencies (Python 3.7+ recommended):**
-   ```
-   pip install numpy matplotlib pillow
-   ```
-3. **Run a simulation:**
-   ```
-   python grid_competition/grid_competition.py  # Prompts for settings and confirmation
-   ```
-   - For a demo/test run:
-   ```
-   python grid_competition/grid_competition.py --demo
-   python grid_competition/grid_competition.py --test
-   ```
-   - To use custom number of steps or a specific seed:
-   ```
-   python grid_competition/grid_competition.py --steps 150 --seed 137
-   ```
-   - To specify output directory (for persistent runs):
-   ```
-   python grid_competition/grid_competition.py --output-dir ./outputs
-   ```
+### Basic Testing
+- Run the provided test suite:
+  ```bash
+  pytest
+  ```
+- See [testing_evident.md](./testing_evident.md) for detailed test evidence and scenarios.
 
-4. **See results:**
-    - Every run creates a timestamped, unique output folder containing:
-      * `grid_competition_population.txt`: Per-step counts of dolphins/humans (with sex and pairing if enabled)
-      * `grid_competition_summary.txt`: Summary of final population, extinction events, key milestones
-      * `grid_competition.gif`: Animation of the grid and competition dynamics (**if enabled/successful**)
-      * `grid_competition.log`: Structured event log (optional)
+## Usage with Avatars and Automation
+### FastA2A Integration
+- The agent implements the FastA2A v0.2 protocol, supporting avatars and automation tools.
+- Endpoints:
+  - `GET /.well-known/agent.json` – Agent metadata
+  - `POST /a2a` – Main conversation endpoint (accepts `prompt` or `message` fields)
 
-## Features
-- **Spatial agent-based dynamics:** Dolphins and humans occupy and colonize cells on the grid.
-- **Sexed reproduction:** Only adjacent M+F pairs of same species can reproduce.
-- **Individual movement:** Each agent may move one step per cycle, prioritizing mate proximity.
-- **Density-dependent illness:** Clusters with ≥6 same-type neighbors may die or become weakened (configurable probabilities)
-- **Dynamic per-run output:** All artifacts are saved in a unique folder per run for traceability and comparison.
+### Example: Automated Conversation
+```python
+import requests
 
-## Output Versioning Policy
-_Every simulation run creates its own, timestamped, UUID-suffixed subfolder (e.g., `simulation_runs/2025-08-17T19-45-43_f00baa`). All logs, CSVs, summaries, GIFs, and data files for a run are isolated and never overwritten._
-- By default, demo/test outputs go under `demo_run_...` or `test_run_...`
-- Production runs go under `simulation_runs/` or a user-supplied output dir
-- Outputs are deliberately .gitignored by default for reproducibility (exception: you may add demo/example folders manually)
-
-## Interpreting Outputs
-- **grid_competition.gif**: Shows the spatial spread, extinction/coexistence, and illness events frame by frame
-- **grid_competition_population.txt**: CSV of populations per step
-- **grid_competition_summary.txt**: Final counts and key events
-- **grid_competition.log**: Optional; detailed events, parameter records
-
-## Troubleshooting
-- If you see no .gif in outputs, check PIL and matplotlib setup, or rerun locally with GUI support.
-- For reproducibility, use the same seed (--seed).
-- Never run as root unless explicitly intended (the script blocks privileged output unwisely).
-- Use forced git add `git add -f simulation_runs/...` if you wish to commit example outputs for sharing.
-
-## How to Contribute / Contact
-- Open issues or PRs in this repository.
-- Suggestions, new ecological rules, or code improvements are welcome!
-
----
-
-_Last updated: 2025-08-17_
-
-
-## Autonomous and Programmatic Usage
-
-This repository is designed for fully autonomous, hands-free operation, suitable for agent orchestration, large-scale experiments, or automated workflows. All key features for autonomous and programmatic use are included (excluding credential management).
-
-**Key Features Supporting Autonomy:**
-- **Batch Runnable & Headless:** All simulation runs, including different scenarios, parameter sweeps, or batch testing, can be run fully non-interactively from the CLI (see `--no-confirm`, `--output-dir`, `--steps`, `--seed`, etc). Demo and test runs are gated off via the `--demo` flag.
-- **Reproducible Outputs:** Every run creates a uniquely named output directory (timestamp plus short UUID) under `outputs/` or as specified with `--output-dir`. This ensures collision-free, versioned, and auditable experiment outputs without overwrites.
-- **Configurable via CLI:** All scenario configuration—founder numbers, sex splits, illness parameters, grid size, number of steps, seeds, etc.—can be set via command-line flags, enabling automation by shell scripts or workflow runners.
-- **No GUI Required:** The simulation can run entirely in the background. All essential outputs—population histories, run summaries, GIF animations—are written to the output directory. Results are never sent outside the specified folder tree.
-- **No External Intervention Needed:** With confirmation flags set, a full experiment or parameter sweep can proceed on any system with Python and required dependencies installed.
-- **Audit & Logging:** Per-run logs, output and summary files, and run parameters (including seeds) are saved in each output directory for robust reproducibility.
-- **Demo/Test Isolation:** Demo/test runs go to special subfolders and are never allowed to overwrite or intermingle with real output data, ensuring safe experimentation without risk to production results.
-- **Supports Orchestration:** You can invoke the simulation from Python, bash, or workflow runners (e.g., GitHub Actions/CI/CD, SLURM, Airflow) to automate large study designs.
-
-**Example: Automated Batch Run (Headless)**
-```bash
-python grid_competition/grid_competition.py --steps 100 --grid-size 50 --seed 42 --output-dir ./outputs/ai_batch_test1 --no-confirm
+url = 'http://localhost:8000/a2a'
+payload = {"prompt": "Summarize the latest test results."}
+response = requests.post(url, json=payload, stream=True)
+for line in response.iter_lines():
+    print(line.decode())
 ```
 
-**Recommended Autonomous Workflow:**
-1. Install requirements (see below).
-2. Prepare your scenario/configuration (either via CLI flags or a wrapper script).
-3. Launch batch or single runs with `--no-confirm` and an explicit `--output-dir` (one per process/replicate for parallel jobs), or let the script auto-generate output folders.
-4. All outputs (logs, GIFs, summaries, population time series) will be in the per-run folder, safely versioned.
-5. Optionally run analysis scripts or test suites on the output folders.
+### Sample Avatar Conversation
+- Avatar sends a prompt to `/a2a` and receives a streaming response.
+- Integrate with test automation frameworks by calling the API and parsing the response.
 
-**Credential-Free Operation:**
-- All local code and CLI runs require no credentials.
-- For pushing data/code to remote repositories (e.g., GitHub), only the minimal token or deploy key for version control is ever required, and those are never stored or hard-coded in the codebase.
-- All settings for outputs, logging, and automation are controlled via flags or config files, not environment secrets.
+## Testing and Quality Assurance
+- Comprehensive automated tests are provided and documented in [testing_evident.md](./testing_evident.md).
+- To run tests:
+  ```bash
+  pytest
+  ```
+- To extend tests, add new cases to the `tests/` directory following the existing structure.
+- Tests cover:
+  - Endpoint availability and correctness
+  - Error handling (e.g., missing fields, wrong methods)
+  - Model integration
+  - Edge cases and streaming behavior
 
-**CI/CD Integration Tips:**
-You can set up automated regression testing or batch simulation using continuous integration pipelines:
-- Add runner stages that call the simulation entrypoint(s) non-interactively with scenario and output arguments.
-- Artifacts can be stored as pipeline artifacts or exported to data lakes for metaanalysis.
+## Troubleshooting and FAQ
+### Common Issues
+- **Cannot connect from Docker container:**
+  - Ensure the agent listens on `0.0.0.0`.
+  - Use Docker's `--network=host` mode.
+  - Check firewall and Docker network settings.
+- **Authentication errors with GitHub:**
+  - Store your GitHub PAT as a secret (e.g., `GITHUB_PAT`) and reference it securely.
+  - See secret management tips below.
+- **Model not responding:**
+  - Verify Ollama is running and the model is loaded.
+  - Check agent logs for errors.
+- **400/405 errors on /a2a:**
+  - Ensure you use POST with a valid JSON body containing `prompt` or `message`.
 
-See the usage and troubleshooting sections below for more details. For direct automation or programmatic control, see the docstring of `grid_competition.py` and the CLI `--help` output.
+### Solutions
+- Restart the agent after changing configuration or secrets.
+- Review [testing_evident.md](./testing_evident.md) for known issues and resolutions.
+- For Docker networking, see [Docker networking docs](https://docs.docker.com/network/).
 
-_Last updated: 2025-08-17_
-# Ollama Gemma3 FastA2A Agent
+## Extensibility and Development
+### Adding Models or Endpoints
+- To add a new model, update the Ollama configuration and ensure the agent forwards prompts correctly.
+- To add endpoints, extend the FastAPI app in `main.py`.
 
-A minimal FastA2A-compatible agent in Python using FastAPI. Forwards prompts to a local Ollama Gemma3 API and returns responses in A2A format.
+### Best Practices
+- Regularly review the repository for secrets before pushing.
+- Clean up unnecessary files and artifacts before committing.
+- Use automated secret scanning tools (e.g., git-secrets, truffleHog).
+- Store secrets (e.g., GitHub PAT) securely and reference them as environment variables or via your automation platform.
+- Follow PEP8 and FastAPI best practices for code quality.
 
-## Features
-- Exposes `/.well-known/agent.json` (agent card) and `/a2a` endpoints
-- Forwards prompts to Ollama Gemma3 at `http://host.docker.internal:11434`
-- Returns model responses in FastA2A format
-
-## Requirements
-- Python 3.8+
-- Ollama running locally with the `gemma3` model pulled
-
-## Installation
-```bash
-cd /root/ollama_a2a_agent
-pip install -r requirements.txt
-```
-
-## Running the Agent
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-## Endpoints
-- **Agent Card:** `GET /.well-known/agent.json`
-- **A2A Chat:** `POST /a2a` with JSON body `{ "prompt": "your message" }`
-
-## Example Request
-```bash
-curl -X POST http://localhost:8000/a2a   -H 'Content-Type: application/json'   -d '{"prompt": "Hello, who are you?"}'
-```
-
-## Environment Variables (optional)
-- `OLLAMA_URL` (default: http://host.docker.internal:11434/api/generate)
-- `OLLAMA_MODEL` (default: gemma3)
-
-
----
-
-# Ollama Gemma3 FastA2A Agent
-
-A minimal FastA2A-compatible agent in Python using FastAPI. Forwards prompts to a local Ollama Gemma3 API and returns responses in A2A format.
-
-## Features
-- Exposes `/.well-known/agent.json` (agent card) and `/a2a` endpoints
-- Forwards prompts to Ollama Gemma3 at `http://host.docker.internal:11434`
-- Returns model responses in FastA2A format
-
-## Requirements
-- Python 3.8+
-- Ollama running locally with the `gemma3` model pulled
-
-## Installation
-```bash
-cd /root/ollama_a2a_agent
-pip install -r requirements.txt
-```
-
-## Running the Agent
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-## Endpoints
-- **Agent Card:** `GET /.well-known/agent.json`
-- **A2A Chat:** `POST /a2a` with JSON body `{ "prompt": "your message" }`
-
-## Example Request
-```bash
-curl -X POST http://localhost:8000/a2a   -H Content-Type: application/json   -d {prompt: Hello, who are you?}
-```
-
-## Environment Variables (optional)
-- `OLLAMA_URL` (default: http://host.docker.internal:11434/api/generate)
-- `OLLAMA_MODEL` (default: gemma3)
-
+## Further Documentation
+- See [User_manual.md](./User_manual.md) for a full user guide.
+- See [testing_evident.md](./testing_evident.md) for test evidence and scenarios.
