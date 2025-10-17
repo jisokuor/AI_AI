@@ -4,3 +4,7 @@ simulation_runs/*
 
 
 outputs/
+__pycache__/
+*.log
+outputs/
+*.pyc
