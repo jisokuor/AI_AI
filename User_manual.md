@@ -1,3 +1,27 @@
+## FastA2A Agent Card: .well-known/agent.json
+
+This project includes a static agent card at `.well-known/agent.json`. This file is used by other agents and clients to automatically discover and connect to your FastA2A agent.
+
+**What is it?**
+- A JSON file describing the agent's name, description, endpoints, capabilities, maintainer, and license.
+- Follows the FastA2A agent card schema.
+
+**How to use:**
+- Edit `.well-known/agent.json` to reflect your agent's details.
+- Ensure the `a2a` endpoint matches your deployment URL.
+- Other agents and tools will read this file to find and interact with your agent.
+
+**Example:**
+```json
+{
+  "name": "Your AI Agent Name",
+  "endpoints": {
+    "a2a": "https://your-domain.com/a2a"
+  },
+  ...
+}
+```
+
 # FastA2A Ollama Agent User Manual
 
 ## 1. Introduction and Purpose
