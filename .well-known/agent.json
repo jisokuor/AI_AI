@@ -1,0 +1,21 @@
+{
+  "@context": "https://a2a.org/agent.schema.jsonld",
+  "id": "https://your-domain.com/.well-known/agent.json",
+  "type": "Agent",
+  "name": "Your AI Agent Name",
+  "description": "A brief description of your AI agent and its purpose.",
+  "version": "1.0.0",
+  "endpoints": {
+    "a2a": "https://your-domain.com/a2a"
+  },
+  "capabilities": [
+    "text-generation",
+    "question-answering"
+  ],
+  "maintainer": {
+    "name": "Your Name or Organization",
+    "email": "contact@your-domain.com"
+  },
+  "license": "Apache-2.0",
+  "created": "2025-11-01T22:56:25Z"
+}
