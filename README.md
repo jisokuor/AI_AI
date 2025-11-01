@@ -153,3 +153,74 @@ for line in response.iter_lines():
 ## Further Documentation
 - See [User_manual.md](./User_manual.md) for a full user guide.
 - See [testing_evident.md](./testing_evident.md) for test evidence and scenarios.
+
+
+---
+
+## Internet Connectivity Checker (connectivity_checker.py)
+
+This repository also includes a simple Python utility for checking internet connectivity.
+
+### What is it?
+- `connectivity_checker.py` is a reusable module that checks if the environment has outbound internet access.
+- It attempts a GET request to a specified URL (default: https://www.google.com) with a configurable timeout.
+- Returns `True` if the network is reachable (status code < 500), otherwise `False`.
+- Handles all network errors gracefully (returns `False` on timeout, DNS failure, etc.).
+
+### Usage
+**As a module in your Python code:**
+```python
+from connectivity_checker import is_connected
+if is_connected():
+    print('Internet is reachable!')
+else:
+    print('No internet connection.')
+```
+
+**Standalone test:**
+```bash
+python3 -c "from connectivity_checker import is_connected; print(is_connected())"
+```
+
+### Customization
+- You can specify a different URL or timeout:
+```python
+is_connected(url='https://example.com', timeout=5)
+```
+
+### When to use
+- Before running scripts or automation that require internet access
+- In CI/CD pipelines to check network status
+- As a diagnostic tool in containers or cloud environments
+
+---
+
+---
+
+## Human-Dolphin Grid Simulation as a System Under Test (SUT) for Learning Software Testing
+
+This repository includes a unique, grid-based simulation designed specifically as a **System Under Test (SUT)** for training and developing software test teams—including both human and virtual AI agentified teams.
+
+### Purpose and Educational Value
+- **Realistic Practice:** The simulation provides a controllable, engaging environment for practicing all phases of the software testing lifecycle: requirements analysis, test design, execution, defect reporting, and results analysis.
+- **Agent-Based Complexity:** By simulating interactions between human and dolphin agents on a 50x50 grid—with configurable illness rates, safe zones, and adjacency logic—the SUT offers rich scenarios for black-box, white-box, exploratory, and regression testing.
+- **Auditability & Traceability:** Each simulation run creates a unique output directory, ensuring data safety, reproducibility, and auditability—ideal for test reporting and process improvement exercises.
+- **Teamwork & Role Rotation:** The SUT supports collaborative exercises, role rotation (analyst, automator, reviewer), and feedback cycles, aligning with ISTQB and test management best practices.
+- **AI-Driven Testing:** The simulation is suitable for both human testers and AI-driven/agentified test automation, making it a modern platform for hybrid or fully virtual test teams.
+
+### Key Components
+- `grid_competition.py`: Main simulation script for human-dolphin interactions.
+- `human_dolphin_competition_cluster50x50.py`: For batch or clustered simulation runs.
+- `grid_competition/`: Supporting modules and configurations.
+- `simulation_runs/`: Stores all output data, logs, and results, organized by unique run folders.
+
+### Typical Training Use Cases
+- Practicing test case design, execution, and defect reporting in a safe, repeatable environment.
+- Onboarding new testers or AI agents to real-world testing challenges.
+- Team-building, mentoring, and skill development through collaborative exercises.
+- Experimenting with automation frameworks and test management tools.
+
+**In summary:**
+> This simulation SUT is a powerful, motivating tool for building technical, methodological, and soft skills in test teams—whether human, AI, or a mix of both.
+
+---
