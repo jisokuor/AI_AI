@@ -64,6 +64,19 @@ docker run -d -p 8000:8000 --network=host ollama-a2a-agent
 
 ### FastA2A Agent Metadata (.well-known/agent.json)
 
+This repository includes a static agent card at `.well-known/agent.json`.
+
+**Key fields for FastA2A v0.2 compatibility:**
+- `protocol`: Specifies protocol name and version.
+- `endpoints`: Now includes both `a2a` and `metadata` (and optionally `health`).
+- `build`: (Optional) Includes commit and build time for auditability.
+
+**Purpose:** Enables automated discovery and integration with FastA2A-compatible tools.
+**Customization:** Edit the fields (name, description, endpoints, etc.) to match your deployment.
+**Reference:** See the template for required fields and example values.
+
+
+
 This repository includes a static agent card at `.well-known/agent.json`. This file follows the FastA2A protocol and describes the agent's identity, capabilities, and endpoint for discovery by other agents or clients.
 
 - **Location:** `.well-known/agent.json`

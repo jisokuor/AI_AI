@@ -5,8 +5,14 @@
   "name": "Your AI Agent Name",
   "description": "A brief description of your AI agent and its purpose.",
   "version": "1.0.0",
+  "protocol": {
+    "name": "FastA2A",
+    "version": "0.2"
+  },
   "endpoints": {
-    "a2a": "https://your-domain.com/a2a"
+    "a2a": "https://your-domain.com/a2a",
+    "metadata": "https://your-domain.com/.well-known/agent.json",
+    "health": "https://your-domain.com/healthz"
   },
   "capabilities": [
     "text-generation",
@@ -17,5 +23,9 @@
     "email": "contact@your-domain.com"
   },
   "license": "Apache-2.0",
-  "created": "2025-11-01T22:56:25Z"
+  "created": "2025-11-01T21:01:28.705315",
+  "build": {
+    "commit": "<git-commit-sha>",
+    "time": "2025-11-01T21:01:28.705325"
+  }
 }

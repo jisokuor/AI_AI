@@ -1,5 +1,31 @@
 ## FastA2A Agent Card: .well-known/agent.json
 
+This project includes a static agent card at `.well-known/agent.json`.
+
+**New in this version:**
+- `protocol` field for FastA2A versioning
+- `endpoints` now includes `metadata` and `health`
+- `build` block for commit/time
+
+**How to use:**
+- Edit `.well-known/agent.json` to reflect your agent's details.
+- Ensure all endpoint URLs are correct and absolute.
+- Other agents and tools will read this file to find and interact with your agent.
+
+**Example:**
+```json
+{
+  "protocol": { "name": "FastA2A", "version": "0.2" },
+  "endpoints": {
+    "a2a": "https://your-domain.com/a2a",
+    "metadata": "https://your-domain.com/.well-known/agent.json",
+    "health": "https://your-domain.com/healthz"
+  },
+  ...
+}
+```
+
+
 This project includes a static agent card at `.well-known/agent.json`. This file is used by other agents and clients to automatically discover and connect to your FastA2A agent.
 
 **What is it?**
