@@ -224,3 +224,35 @@ This repository includes a unique, grid-based simulation designed specifically a
 > This simulation SUT is a powerful, motivating tool for building technical, methodological, and soft skills in test teams—whether human, AI, or a mix of both.
 
 ---
+
+## Verbal Walkthrough: Main Use Cases for the Human-Dolphin Grid Simulation
+
+This simulation is designed as a hands-on System Under Test (SUT) for software test teams and learners. Here’s how you might use it in practice:
+
+**1. Test Case Design and Requirements Analysis**
+- Begin by reviewing the simulation’s rules: humans and dolphins are placed in pairs on a 50x50 grid, with safe zones, illness rates, and adjacency logic.
+- Teams can analyze requirements (e.g., what constitutes a valid pair, how illness spreads, what outputs are expected) and design black-box or white-box test cases.
+
+**2. Running and Observing Simulations**
+- Launch a simulation run (demo, test, or persistent mode). Each run creates a uniquely named output directory, ensuring all results are traceable and never overwritten.
+- Observe outputs: logs, summaries, timecourses, and visualizations (e.g., GIFs of grid evolution).
+- Use these outputs to verify expected behaviors, detect anomalies, and validate test cases.
+
+**3. Defect Reporting and Analysis**
+- If unexpected results or errors are found, teams can use the isolated run directories to collect evidence, reproduce issues, and file detailed defect reports.
+- The strict output versioning makes it easy to compare runs, track regressions, and audit fixes.
+
+**4. Automation and Performance Testing**
+- Use the batch/cluster script to run large numbers of simulations with varying parameters.
+- Analyze aggregate results for performance, stability, or emergent behaviors.
+- Integrate with test automation frameworks to practice CI/CD and automated regression testing.
+
+**5. Teamwork, Role Rotation, and Learning**
+- Rotate roles: one person configures the simulation, another designs tests, a third analyzes outputs, and so on.
+- Practice communication, documentation, and feedback cycles in a safe, engaging environment.
+
+**6. Experimentation and Exploration**
+- Tweak parameters (e.g., illness rates, safe zone size) to explore edge cases and system limits.
+- Use exploratory testing to discover unexpected behaviors or emergent phenomena.
+
+This simulation provides a realistic, auditable playground for building both technical and soft skills in software testing, with every run preserved for learning and improvement.
